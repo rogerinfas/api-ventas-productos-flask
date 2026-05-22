@@ -6,17 +6,17 @@ db = SQLAlchemy()
 babel = Babel()
 
 def get_locale():
-    # If a user is logged in, you may want to return their locale
+    # Si el usuario ha iniciado sesión, podrías devolver su idioma de preferencia
     return request.accept_languages.best_match(['en', 'es'])
 
 def create_app():
     app = Flask(__name__, static_folder='static', static_url_path='')
     
-    # Configure Database (Docker Postgres port 4950)
+    # Configurar Base de Datos (Docker Postgres puerto 4950)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg://user:password@localhost:4950/products_db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
-    # Configure Babel for i18n
+    # Configurar Babel para internacionalización (i18n)
     app.config['BABEL_DEFAULT_LOCALE'] = 'es'
     app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
 

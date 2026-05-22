@@ -62,7 +62,7 @@ async function loadProducts() {
     try {
         const res = await fetch('/api/products', {
             headers: {
-                'Accept-Language': 'es' // Try to get messages in Spanish if any API error happens during fetch, though this is GET
+                'Accept-Language': 'es' // Intentar obtener mensajes en español en caso de error de la API
             }
         });
         const products = await res.json();
@@ -72,13 +72,13 @@ async function loadProducts() {
         
         tbody.innerHTML = '';
         
-        // Keep the first option
+        // Mantener la primera opción
         const firstOption = select.options[0];
         select.innerHTML = '';
         select.appendChild(firstOption);
 
         products.forEach(p => {
-            // Add to table
+            // Agregar a la tabla
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${p.id}</td>
@@ -89,7 +89,7 @@ async function loadProducts() {
             `;
             tbody.appendChild(tr);
 
-            // Add to select
+            // Agregar al selector
             const option = document.createElement('option');
             option.value = p.id;
             option.textContent = `${p.name} (Stock: ${p.stock})`;

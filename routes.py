@@ -21,23 +21,23 @@ def create_product():
     data = request.json
     
     try:
-        # Regex validation applied
+        # Validación Regex aplicada
         sku = Product.validate_sku(data.get('sku', ''))
         name = Product.validate_name(data.get('name', ''))
         price = float(data.get('price', 0))
         stock = int(data.get('stock', 0))
         
-        # Transaction control start
+        # Inicio de control de transacciones
         new_product = Product(sku=sku, name=name, price=price, stock=stock)
         db.session.add(new_product)
-        db.session.commit() # Commit transaction
+        db.session.commit() # Confirmar transacción
         
         return jsonify({'message': _('Product created successfully'), 'id': new_product.id}), 201
         
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
-        db.session.rollback() # Rollback transaction on failure
+        db.session.rollback() # Revertir transacción en caso de fallo
         if 'psycopg2.errors.UniqueViolation' in str(e) or 'UniqueViolation' in str(e) or 'unique constraint' in str(e).lower():
             return jsonify({'error': _('Product with this SKU already exists')}), 400
         return jsonify({'error': _('Failed to create product: ') + str(e)}), 500
@@ -61,7 +61,7 @@ def create_sale():
             
         total_price = product.price * quantity
         
-        # Transaction control
+        # Control de transacciones
         product.stock -= quantity
         new_sale = Sale(product_id=product.id, quantity=quantity, total_price=total_price)
         db.session.add(new_sale)
