@@ -1,0 +1,424 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-05-22 15:35-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: models.py:17
+msgid ""
+"Invalid SKU format. Must be 3 uppercase letters followed by 4 digits "
+"(e.g., ABC1234)."
+msgstr ""
+
+#: models.py:24
+msgid "Name can only contain letters, numbers, and spaces."
+msgstr ""
+
+#: routes.py:35
+msgid "Product created successfully"
+msgstr ""
+
+#: routes.py:42
+msgid "Product with this SKU already exists"
+msgstr ""
+
+#: routes.py:43
+msgid "Failed to create product: "
+msgstr ""
+
+#: routes.py:52
+msgid "Quantity must be greater than zero"
+msgstr ""
+
+#: routes.py:57
+msgid "Product not found"
+msgstr ""
+
+#: routes.py:60
+msgid "Not enough stock"
+msgstr ""
+
+#: routes.py:70
+msgid "Sale registered successfully"
+msgstr ""
+
+#: routes.py:74
+msgid "Failed to register sale: "
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/_termui_impl.py:191
+msgid "d"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/_termui_impl.py:693
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/_termui_impl.py:697
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/_winconsole.py:156
+#: venv/lib/python3.14/site-packages/click/_winconsole.py:173
+#, python-brace-format
+msgid "Windows error: {error}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:98
+msgid "deprecated"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:1209
+msgid "Options"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:1284
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:1300
+#, python-brace-format
+msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:1487
+msgid "Aborted!"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:1861
+msgid "Commands"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:1892
+msgid "Missing command."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:2404
+msgid "Value must be an iterable."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:2427
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:2624
+#, python-brace-format
+msgid ""
+"DeprecationWarning: The {param_type} {name!r} is "
+"deprecated.{extra_message}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:3025
+#, python-brace-format
+msgid "Name '{name}' defined twice"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:3041
+#, python-brace-format
+msgid "Boolean option {decl!r} cannot use the same flag for true/false."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:3060
+#, python-brace-format
+msgid "Could not determine name for option with declarations {decls!r}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:3067
+#, python-brace-format
+msgid ""
+"No options defined but a name was passed ({name}). Did you mean to "
+"declare an argument instead? Did you mean to pass '--{name}'?"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:3144
+#, python-brace-format
+msgid "env var: {var}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:3147
+#, python-brace-format
+msgid "default: {default}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:3151
+msgid "required"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:3211
+msgid "(dynamic)"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/core.py:3503
+#, python-brace-format
+msgid "Arguments take exactly one parameter declaration, got {length}: {decls}."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/decorators.py:399
+msgid "Do you want to continue?"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/decorators.py:400
+msgid "Confirm the action without prompting."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/decorators.py:465
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/decorators.py:522
+msgid "Show the version and exit."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/decorators.py:548
+msgid "Show this message and exit."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:29
+#, python-brace-format
+msgid "Did you mean {possibility}?"
+msgid_plural "(Did you mean one of: {possibilities}?)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:59
+#: venv/lib/python3.14/site-packages/click/exceptions.py:102
+#: venv/lib/python3.14/site-packages/click/termui.py:228
+#, python-brace-format
+msgid "Error: {message}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:93
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:143
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:145
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:203
+msgid "Missing argument"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:205
+msgid "Missing option"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:207
+msgid "Missing parameter"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:209
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:216
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:235
+#, python-brace-format
+msgid "No such option {name!r}."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:265
+#, python-brace-format
+msgid "No such command {name!r}."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:321
+msgid "unknown error"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/exceptions.py:328
+#, python-brace-format
+msgid "Could not open file {filename!r}: {message}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/formatting.py:162
+msgid "Usage:"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/parser.py:145
+#, python-brace-format
+msgid "Invalid start character for option ({option})"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/parser.py:203
+#, python-brace-format
+msgid "Argument {name!r} takes {nargs} values."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/parser.py:382
+#, python-brace-format
+msgid "Option {name!r} does not take a value."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/parser.py:445
+#, python-brace-format
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/click/shell_completion.py:337
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/shell_completion.py:344
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/termui.py:212
+msgid "Repeat for confirmation"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/termui.py:239
+msgid "Error: The two entered values do not match."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/termui.py:293
+msgid "Error: invalid input"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/termui.py:675
+#: venv/lib/python3.14/site-packages/click/termui.py:681
+#, python-brace-format
+msgid "Unknown color {colour!r}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/termui.py:930
+msgid "Press any key to continue..."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:364
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:401
+#, python-brace-format
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:407
+#, python-brace-format
+msgid "Choice({choices})"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:493
+#, python-brace-format
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:515
+#, python-brace-format
+msgid "{value!r} is not a valid {number_type}."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:580
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:762
+#, python-brace-format
+msgid "{value!r} is not a valid boolean. Recognized values: {states}"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:788
+#, python-brace-format
+msgid "{value!r} is not a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:998
+msgid "file"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:1000
+msgid "directory"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:1002
+msgid "path"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:1048
+#, python-brace-format
+msgid "{name} {filename!r} does not exist."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:1057
+#, python-brace-format
+msgid "{name} {filename!r} is a file."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:1065
+#, python-brace-format
+msgid "{name} {filename!r} is a directory."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:1074
+#, python-brace-format
+msgid "{name} {filename!r} is not readable."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:1083
+#, python-brace-format
+msgid "{name} {filename!r} is not writable."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:1092
+#, python-brace-format
+msgid "{name} {filename!r} is not executable."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/click/types.py:1164
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/click/utils.py:345
+#: venv/lib/python3.14/site-packages/click/utils.py:366
+#, python-brace-format
+msgid "Unknown standard stream '{name}'"
+msgstr ""
+

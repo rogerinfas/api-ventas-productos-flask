@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products & Sales App</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #2980b9; }
+        .alert { padding: 10px; margin-bottom: 15px; border-radius: 4px; display: none; }
+        .alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 12px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .row { display: flex; gap: 20px; }
+        .col { flex: 1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Inventory & Sales Management</h1>
+        
+        <div id="alertMessage" class="alert"></div>
+
+        <div class="row">
+            <div class="col">
+                <h2>Add Product</h2>
+                <form id="productForm">
+                    <div class="form-group">
+                        <label for="sku">SKU (e.g. ABC1234)</label>
+                        <input type="text" id="sku" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" id="price" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Initial Stock</label>
+                        <input type="number" id="stock" required>
+                    </div>
+                    <button type="submit">Create Product</button>
+                </form>
+            </div>
+            
+            <div class="col">
+                <h2>Register Sale</h2>
+                <form id="saleForm">
+                    <div class="form-group">
+                        <label for="saleProduct">Product</label>
+                        <select id="saleProduct" style="width: 100%; padding: 8px;" required>
+                            <option value="">Select a product...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="saleQty">Quantity</label>
+                        <input type="number" id="saleQty" min="1" required>
+                    </div>
+                    <button type="submit">Register Sale</button>
+                </form>
+            </div>
+        </div>
+
+        <h2>Products List</h2>
+        <button type="button" onclick="loadProducts()">Refresh List</button>
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>SKU</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Products will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
