@@ -115,6 +115,3 @@ Arranca el servidor de desarrollo Flask de manera limpia a través de nuestro ar
 ```bash
 python run.py
 ```
-
-La aplicación estará disponible de inmediato en tu navegador en:
-**http://localhost:5001**
