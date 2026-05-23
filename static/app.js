@@ -65,6 +65,9 @@ async function loadProducts() {
                 'Accept-Language': 'es' // Intentar obtener mensajes en español en caso de error de la API
             }
         });
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const products = await res.json();
         
         const tbody = document.querySelector('#productsTable tbody');
