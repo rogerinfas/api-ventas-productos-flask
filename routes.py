@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, current_app
 from flask_babel import gettext as _
 from app import db
 from models import Product, Sale
+from sqlalchemy.exc import IntegrityError
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -18,17 +19,24 @@ def get_products():
 
 @api_bp.route('/products', methods=['POST'])
 def create_product():
-    data = request.json
+    data = request.json or {}
     
     try:
-        # Validación Regex aplicada
-        sku = Product.validate_sku(data.get('sku', ''))
-        name = Product.validate_name(data.get('name', ''))
-        price = float(data.get('price', 0))
-        stock = int(data.get('stock', 0))
+        price_raw = data.get('price')
+        stock_raw = data.get('stock')
         
-        # Inicio de control de transacciones
-        new_product = Product(sku=sku, name=name, price=price, stock=stock)
+        # Intentar convertir valores numéricos antes de instanciar para un error controlado
+        price = float(price_raw) if price_raw is not None else None
+        stock = int(stock_raw) if stock_raw is not None else None
+
+        # La validación Regex se ejecuta automáticamente al instanciar mediante @validates de SQLAlchemy
+        new_product = Product(
+            sku=data.get('sku'),
+            name=data.get('name'),
+            price=price,
+            stock=stock
+        )
+        
         db.session.add(new_product)
         db.session.commit() # Confirmar transacción
         
@@ -36,23 +44,29 @@ def create_product():
         
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({'error': _('Product with this SKU already exists')}), 400
     except Exception as e:
-        db.session.rollback() # Revertir transacción en caso de fallo
-        if 'psycopg2.errors.UniqueViolation' in str(e) or 'UniqueViolation' in str(e) or 'unique constraint' in str(e).lower():
-            return jsonify({'error': _('Product with this SKU already exists')}), 400
+        db.session.rollback()
         return jsonify({'error': _('Failed to create product: ') + str(e)}), 500
 
 @api_bp.route('/sales', methods=['POST'])
 def create_sale():
-    data = request.json
+    data = request.json or {}
     product_id = data.get('product_id')
-    quantity = int(data.get('quantity', 0))
+    
+    try:
+        quantity = int(data.get('quantity', 0))
+    except ValueError:
+        return jsonify({'error': _('Quantity must be an integer')}), 400
     
     if quantity <= 0:
         return jsonify({'error': _('Quantity must be greater than zero')}), 400
         
     try:
-        product = Product.query.get(product_id)
+        # Bloqueo pesimista (SELECT FOR UPDATE) para evitar condiciones de carrera en concurrencia
+        product = db.session.query(Product).filter_by(id=product_id).with_for_update().first()
         if not product:
             return jsonify({'error': _('Product not found')}), 404
             

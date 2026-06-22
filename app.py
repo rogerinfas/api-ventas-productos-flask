@@ -1,6 +1,10 @@
+import os
 from flask import Flask, request, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_babel import Babel
+from dotenv import load_dotenv
+
+load_dotenv()
 
 db = SQLAlchemy()
 babel = Babel()
@@ -12,8 +16,11 @@ def get_locale():
 def create_app():
     app = Flask(__name__, static_folder='static', static_url_path='')
     
-    # Configurar Base de Datos (Docker Postgres puerto 4950)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg://user:password@localhost:4950/products_db'
+    # Configurar Base de Datos (Docker Postgres puerto 4950 por defecto)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+        'DATABASE_URL', 
+        'postgresql+psycopg://user:password@localhost:4950/products_db'
+    )
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     # Configurar Babel para internacionalización (i18n)
