@@ -13,7 +13,7 @@ def get_locale():
     # Si el usuario ha iniciado sesión, podrías devolver su idioma de preferencia
     return request.accept_languages.best_match(['en', 'es'])
 
-def create_app():
+def create_app(config_overrides=None):
     app = Flask(__name__, static_folder='static', static_url_path='')
     
     # Configurar Base de Datos (Docker Postgres puerto 4950 por defecto)
@@ -26,6 +26,9 @@ def create_app():
     # Configurar Babel para internacionalización (i18n)
     app.config['BABEL_DEFAULT_LOCALE'] = 'es'
     app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+
+    if config_overrides:
+        app.config.update(config_overrides)
 
     db.init_app(app)
     babel.init_app(app, locale_selector=get_locale)
