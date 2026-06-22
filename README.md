@@ -115,3 +115,34 @@ Arranca el servidor de desarrollo Flask de manera limpia a través de nuestro ar
 ```bash
 python run.py
 ```
+
+---
+
+## 5. Pruebas Automatizadas en Paralelo
+
+Para validar la consistencia e integridad del backend, se incluye una capa de pruebas automatizadas con soporte para ejecución paralela a través de `pytest` y `pytest-xdist`.
+
+### Conceptos Clave de la Ejecución en Paralelo
+1. **Trabajadores en Paralelo (`pytest-xdist`)**: En lugar de ejecutar los tests uno tras otro de forma secuencial, `pytest-xdist` crea múltiples procesos de CPU ("workers") que ejecutan los tests de forma concurrente, reduciendo significativamente el tiempo de ejecución.
+2. **Aislamiento en Memoria**: Los tests están configurados en [tests/conftest.py](file:///home/acide/Escritorio/universidad/api-ventas-productos-flask/tests/conftest.py) para utilizar bases de datos SQLite independientes en memoria (`sqlite:///:memory:`). Esto significa que cada proceso trabajador tiene su propia base de datos efímera aislada, previniendo colisiones de datos cruzadas sin necesidad de levantar contenedores múltiples.
+
+### Cómo Ejecutar las Pruebas
+
+* **Ejecución Secuencial Estándar**:
+  ```bash
+  PYTHONPATH=. venv/bin/pytest -v
+  ```
+  *(Duración típica para 8 tests con delays simulados de 1s: ~8.0 segundos)*
+
+* **Ejecución Paralela con 4 Trabajadores**:
+  ```bash
+  PYTHONPATH=. venv/bin/pytest -n 4 -v
+  ```
+  *(Duración típica para 8 tests con delays simulados de 1s: ~2.7 segundos)*
+
+### Evidencia de Ejecución en Paralelo
+Al ejecutar con `-n 4`, se puede visualizar en la consola el inicio de los 4 workers distribuyéndose los tests y completándose en una fracción del tiempo original:
+
+![Ejecución de Pruebas en Paralelo](docs/images/parallel_test_execution.png)
+
+
