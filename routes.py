@@ -1,12 +1,47 @@
 from flask import Blueprint, request, jsonify, current_app
 from flask_babel import gettext as _
+from flask_jwt_extended import create_access_token, jwt_required
 from app import db
-from models import Product, Sale
+from models import Product, Sale, User
 from sqlalchemy.exc import IntegrityError
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
+@api_bp.route('/register', methods=['POST'])
+def register():
+    data = request.json or {}
+    username = data.get('username')
+    password = data.get('password')
+
+    if not username or not password:
+        return jsonify({'error': _('Username and password required')}), 400
+
+    if User.query.filter_by(username=username).first():
+        return jsonify({'error': _('Username already exists')}), 400
+
+    new_user = User(username=username)
+    new_user.set_password(password)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({'message': _('User registered successfully')}), 201
+
+@api_bp.route('/login', methods=['POST'])
+def login():
+    data = request.json or {}
+    username = data.get('username')
+    password = data.get('password')
+    
+    user = User.query.filter_by(username=username).first()
+    
+    if not user or not user.check_password(password):
+        return jsonify({'error': _('Invalid username or password')}), 401
+        
+    access_token = create_access_token(identity=str(user.id))
+    return jsonify({'access_token': access_token}), 200
+
 @api_bp.route('/products', methods=['GET'])
+@jwt_required()
 def get_products():
     products = Product.query.all()
     return jsonify([{
@@ -18,6 +53,7 @@ def get_products():
     } for p in products])
 
 @api_bp.route('/products', methods=['POST'])
+@jwt_required()
 def create_product():
     data = request.json or {}
     
@@ -52,6 +88,7 @@ def create_product():
         return jsonify({'error': _('Failed to create product: ') + str(e)}), 500
 
 @api_bp.route('/sales', methods=['POST'])
+@jwt_required()
 def create_sale():
     data = request.json or {}
     product_id = data.get('product_id')

@@ -1,7 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
-    loadProducts();
+let token = localStorage.getItem('jwt_token');
 
-    document.getElementById('productForm').addEventListener('submit', async (e) => {
+function checkAuth() {
+    if (!token) {
+        window.location.href = '/login';
+    } else {
+        loadProducts();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    checkAuth();
+
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        token = null;
+        localStorage.removeItem('jwt_token');
+        window.location.href = '/login';
+    });
+
+    document.getElementById('productForm')?.addEventListener('submit', async (e) => {
         e.preventDefault();
         const data = {
             sku: document.getElementById('sku').value,
@@ -13,7 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const res = await fetch('/api/products', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(data)
             });
             const result = await res.json();
@@ -40,7 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const res = await fetch('/api/sales', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(data)
             });
             const result = await res.json();
@@ -62,9 +84,16 @@ async function loadProducts() {
     try {
         const res = await fetch('/api/products', {
             headers: {
-                'Accept-Language': 'es' // Intentar obtener mensajes en español en caso de error de la API
+                'Accept-Language': 'es', // Intentar obtener mensajes en español en caso de error de la API
+                'Authorization': `Bearer ${token}`
             }
         });
+        if (res.status === 401 || res.status === 422) {
+            token = null;
+            localStorage.removeItem('jwt_token');
+            window.location.href = '/login';
+            throw new Error('Unauthorized');
+        }
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
