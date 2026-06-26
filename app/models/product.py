@@ -1,20 +1,7 @@
 import re
 from app import db
-from datetime import datetime, timezone
 from flask_babel import gettext as _
 from sqlalchemy.orm import validates
-from werkzeug.security import generate_password_hash, check_password_hash
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -25,14 +12,12 @@ class Product(db.Model):
 
     @validates('sku')
     def validate_sku(self, key, sku):
-        # Regex para asegurar que el SKU sea exactamente 3 letras mayúsculas seguidas de 4 dígitos (ej. ABC1234)
         if not re.match(r'^[A-Z]{3}\d{4}$', sku or ''):
             raise ValueError(_("Invalid SKU format. Must be 3 uppercase letters followed by 4 digits (e.g., ABC1234)."))
         return sku
 
     @validates('name')
     def validate_name(self, key, name):
-        # Regex para asegurar que el nombre contenga solo letras, números y espacios
         if not re.match(r'^[A-Za-z0-9\s]+$', name or ''):
             raise ValueError(_("Name can only contain letters, numbers, and spaces."))
         return name
@@ -48,10 +33,3 @@ class Product(db.Model):
         if stock is None or int(stock) < 0:
             raise ValueError(_("Stock must be a non-negative integer."))
         return stock
-
-class Sale(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    total_price = db.Column(db.Numeric(10, 2), nullable=False)
-    date = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))

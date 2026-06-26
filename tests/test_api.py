@@ -1,7 +1,7 @@
 import time
 import pytest
 from app import db
-from models import Product
+from app.models.product import Product
 
 def simulate_delay():
     # Retraso simulado para evidenciar visualmente el paralelismo en la ejecución

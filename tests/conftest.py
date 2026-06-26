@@ -22,7 +22,7 @@ def client(app):
 def auth_headers(client):
     response = client.post('/api/login', json={
         "username": "admin",
-        "password": "password"
+        "password": "admin"
     })
     token = response.get_json().get('access_token')
     return {'Authorization': f'Bearer {token}'}
